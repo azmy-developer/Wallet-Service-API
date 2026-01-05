@@ -30,11 +30,22 @@ class TransferService
             $to   = Wallet::lockForUpdate()->findOrFail($toId);
 
             if ($from->currency !== $to->currency) {
-                abort(422, 'Currency mismatch');
+//                abort(422, 'Currency mismatch');
+
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Currency mismatch',
+                    'data' => null
+                ], 400);
             }
 
             if ($from->balance < $amount) {
-                abort(422, 'Insufficient balance');
+//                abort(422, 'Insufficient balance');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Insufficient balance',
+                    'data' => null
+                ], 400);
             }
 
             $from->decrement('balance', $amount);

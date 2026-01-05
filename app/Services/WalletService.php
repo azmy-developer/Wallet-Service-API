@@ -48,7 +48,12 @@ class WalletService
             $wallet = $this->wallets->findForUpdate($walletId);
 
             if ($wallet->balance < $amount) {
-                abort(422, 'Insufficient balance');
+//                abort(422, 'Insufficient balance');
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Insufficient balance',
+                    'data' => null
+                ], 400);
             }
 
             $wallet->decrement('balance', $amount);

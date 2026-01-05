@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "c57b0d2a-f6c2-4c80-af8c-bc6df77983d4",
+		"name": "Wallet Service API",
+		"description": "Postman collection for Wallet Service API (Wallets, Deposits, Withdrawals, Transfers)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22777942"
+	},
+	"item": [
+		{
+			"name": "Wallets",
+			"item": [
+				{
+					"name": "Create Wallet",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"owner_name\": \"Azmy\",\n  \"currency\": \"USD\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/wallets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Wallets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/wallets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wallet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/wallets/{{wallet_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets",
+								"{{wallet_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Wallet Balance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/wallets/{{wallet_id}}/balance",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets",
+								"{{wallet_id}}",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "deposit-123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 100\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/wallets/{{wallet_id}}/deposit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets",
+								"{{wallet_id}}",
+								"deposit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "withdraw-123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 50\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/wallets/{{wallet_id}}/withdraw",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets",
+								"{{wallet_id}}",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/wallets/{{wallet_id}}/transactions?type=deposit",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"wallets",
+								"{{wallet_id}}",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "deposit"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfers",
+			"item": [
+				{
+					"name": "Transfer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "transfer-123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"from_wallet_id\": 1,\n  \"to_wallet_id\": 2,\n  \"amount\": 50\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/transfers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"transfers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "wallet_id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
