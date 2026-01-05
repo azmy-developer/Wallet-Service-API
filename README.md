@@ -107,7 +107,7 @@ The same Idempotency-Key will never duplicate transactions
 Stored responses are returned on repeated requests
 
 Setup Instructions : 
-git clone https://github.com/your-username/wallet-service-api.git
+git clone https://github.com/azmy-developer/Wallet-Service-API.git
 cd wallet-service-api
 composer install
 cp .env.example .env
